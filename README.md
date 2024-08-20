@@ -1,7 +1,7 @@
 # Perplexity Calculation Using Transformers
 
 ## Introduction
-This repository provides a Python script for calculating the Perplexity of text using the Transformer models from the Hugging Face library. Perplexity is a common metric used in natural language processing to measure how well a probability model predicts a sample.
+This repository provides a Python script for calculating the Perplexity of text using the public Transformer models from the Hugging Face library. Perplexity is a common metric used in natural language processing to measure how well a probability model predicts a sample.
 
 ## Setup and Configuration
 ### Requirements
@@ -11,14 +11,6 @@ This repository provides a Python script for calculating the Perplexity of text 
 - Accelerate
 - Pandas
 - Numpy
-
-### Installation
-Clone this repository and install the required packages:
-```bash
-git clone <repository-url>
-cd <repository-directory>
-pip install -r requirements.txt
-```
 
 ### Setting Up Environment Variables
 You need to set up the following environment variables:
@@ -34,22 +26,22 @@ os.environ["HF_HOME"] = "your_cache_directory"
 ## Usage
 To run the script, use the following command:
 ```bash
-python calculate_perplexity.py --data your_data.json --type_of_data text --tokenizer your_preferred_tokenizer
+python calculate_perplexity.py 
 ```
 
 ### Arguments
 - `--data`: Path to the JSON file containing the text data.
 - `--type_of_data`: Key in the JSON file which corresponds to the text data.
-- `--tokenizer`: Model and tokenizer identifier from Hugging Face.
+- `--tokenizer`: Tokenizer identifier of the target texts.
+- `--model`: Quality Model from Hugging Face to evaluate the PPL.
 
-## Understanding Perplexity Calculation
-The script calculates Perplexity for each text item in the dataset. It filters out items with fewer than 16 tokens, ensuring that Perplexity calculations are performed only on sufficiently lengthy texts.
+**Note**: For a fair and valid assessment, we recommend using the samme model for tokenizer and quality, and this model should be from Tokenizer. For example, you are calculating PPL for Llama2 7B texts using OPT 1.3B model as quality model, then tokenizer is Llama 2 and Quality model is OPT. However, it is recommended to use Llama2 for both tokenzier and Quality model.
 
 ### Function Details
 - `get_perplexities`: This function takes the model, tokenizer, text, and computation device as inputs and returns the Perplexity of the input text.
 
 ## Output
-The results are saved in a CSV file named `llama2_PPL.csv`, with columns for data item indices and their corresponding Perplexities.
+The results are saved in a CSV file with columns for data item indices and their corresponding Perplexities.
 
 ## Contributing
 Contributions to this project are welcome. Please fork the repository and submit a pull request.
